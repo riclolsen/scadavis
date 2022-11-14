@@ -28,12 +28,12 @@
 
 /**
  * SCADAvis.io synoptic API.
- * @class scadavis - Must be created with the "new" keyword. E.g. var svgraph = new scadavis("div1", "", "https://svgurl.com/svgurl.svg");
+ * @class scadavis - Must be created with the "new" keyword. (use scadavisInit when promise-based method preferred). E.g. var svgraph = new scadavis("div1", "", "https://svgurl.com/svgurl.svg"); 
  * @param {string} [container] - ID of the container object. If empty or null the iframe will be appended to the body.
  * @param {string} [iframeparams] - Parameter string for configuring iframe (excluding id and src and sandbox) e.g. 'frameborder="0" height="250" width="250"'.
  * @param {string} [svgurl] - URL for the SVG file.
  * @param {{container: string|Object, iframeparams: string, svgurl: string, colorsTable: Object}} [paramsobj] - Alternatively parameters can be passed in an object.
- * E.g.: svgraph = new scadavis( {container: "div1"} );
+ * Example usage: var svgraph = new scadavis("div1", "", "https://svgurl.com/svgurl.svg"); 
  */
 function scadavis(container, iframeparams, svgurl) {
   const _this = this
@@ -198,7 +198,7 @@ function scadavis(container, iframeparams, svgurl) {
             _this.loadingSVG = 0
             if (_this.onerror) _this.onerror(xhr.statusText)
             else
-              console.log(
+              console.warn(
                 'SCADAvis.io API: error loading SVG URL. ' + xhr.statusText
               )
           }
@@ -225,7 +225,7 @@ function scadavis(container, iframeparams, svgurl) {
   }
 
   /**
-   * Update values for tags to the component. Send all tags available. Work as a promise.
+   * Update values for tags to the component. Send all tags available. Work as a promise. Only available for version 2+.
    * @method refreshDisplay
    * @param {Object.<string, number>} [values] - values in a object like { "tag1" : 1.0, "tag2": 1.2, "tag3": true }.
    * @returns {Object} Returns a promise. The promise resolves after the display refresh is completed.
@@ -247,7 +247,7 @@ function scadavis(container, iframeparams, svgurl) {
   }
 
   /**
-   * Update values for tags to the component. Send all tags available.
+   * Update values for tags to the component. Send all tags available. (use refreshDisplay when promise-based method preferred)
    * @method updateValues
    * @param {Object.<string, number>} [values] - values in a object like { "tag1" : 1.0, "tag2": 1.2, "tag3": true }.
    * @returns {number} Returns request handle or null if not ready.
@@ -741,8 +741,6 @@ function scadavis(container, iframeparams, svgurl) {
         return
       }
 
-      // console.warn(event.data, new Date().getTime() % 100000)
-
       // when message type "ready", the SVG screen is processed, then we can send real time data to the SCADAvis.io component
       if (
         typeof event.data === 'object' &&
@@ -807,13 +805,13 @@ function scadavis(container, iframeparams, svgurl) {
 
 /**
  * SCADAvis.io synoptic API.
- * @method scadavisInit - Must be created with the "new" keyword. E.g. var svgraph = new scadavis("div1", "", "https://svgurl.com/svgurl.svg");
+ * @method scadavisInit - Initialization of the library via promise. Only available for version 2+.
  * @param {string} [container] - ID of the container object. If empty or null the iframe will be appended to the body.
  * @param {string} [iframeparams] - Parameter string for configuring iframe (excluding id and src and sandbox) e.g. 'frameborder="0" height="250" width="250"'.
  * @param {string} [svgurl] - URL for the SVG file.
  * @param {{container: string|Object, iframeparams: string, svgurl: string, colorsTable: Object}} [paramsobj] - Alternatively parameters can be passed in an object.
- * @returns {Object} Returns a promise. The promise resolves after the svg file is preprocessed (if an svg file was specified) or after the component is loaded.
- * E.g.: svgraph = new scadavisInit( {container: "div1", svgurl: "file.svg"} ).then(function (sv) { ... });
+ * @returns {Object} Returns a promise. The promise resolves after the svg file is preprocessed (if an SVG file was specified) or after the component is loaded.
+ * Example usage: scadavisInit( {container: "div1", svgurl: "file.svg"} ).then(function (sv) { ... });
  */
 function scadavisInit(container, iframeparams, svgurl) {
   return new Promise(function (resolve, reject) {
