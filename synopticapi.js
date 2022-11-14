@@ -27,8 +27,8 @@
  */
 
 /**
- * SCADAvis.io synoptic API.
- * @class scadavis - Must be created with the "new" keyword. (use scadavisInit when promise-based method preferred). E.g. var svgraph = new scadavis("div1", "", "https://svgurl.com/svgurl.svg"); 
+ * Must be created with the "new" keyword. (use scadavisInit when promise-based method preferred). E.g. var svgraph = new scadavis("div1", "", "https://svgurl.com/svgurl.svg"); 
+ * @class scadavis - SCADAvis.io synoptic API class.
  * @param {string} [container] - ID of the container object. If empty or null the iframe will be appended to the body.
  * @param {string} [iframeparams] - Parameter string for configuring iframe (excluding id and src and sandbox) e.g. 'frameborder="0" height="250" width="250"'.
  * @param {string} [svgurl] - URL for the SVG file.
@@ -91,6 +91,7 @@ function scadavis(container, iframeparams, svgurl) {
    * Generate an unique DOM element ID.
    * @private
    * @method guidGenerator
+   * @memberof scadavis
    * @returns {string} DOM ID.
    */
   _this.guidGenerator = function () {
@@ -115,8 +116,9 @@ function scadavis(container, iframeparams, svgurl) {
 
   /**
    * Create a DOM element from HTML.
-   * @method createElementFromHTML
    * @private
+   * @method createElementFromHTML
+   * @memberof scadavis
    * @returns {string} DOM ID.
    */
   _this.createElementFromHTML = function (htmlString) {
@@ -168,6 +170,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Load the SVG synoptic display file from a SVG URL.
    * @method loadURL
+   * @memberof scadavis
    * @param {string} svgurl - The SVG URL.
    */
   _this.loadURL = function (svgurl) {
@@ -211,6 +214,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Reset all data values and tags.
    * @method resetData
+   * @memberof scadavis
    */
   _this.resetData = function () {
     _this.npt = 0
@@ -227,6 +231,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Update values for tags to the component. Send all tags available. Work as a promise. Only available for version 2+.
    * @method refreshDisplay
+   * @memberof scadavis
    * @param {Object.<string, number>} [values] - values in a object like { "tag1" : 1.0, "tag2": 1.2, "tag3": true }.
    * @returns {Object} Returns a promise. The promise resolves after the display refresh is completed.
    */
@@ -249,6 +254,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Update values for tags to the component. Send all tags available. (use refreshDisplay when promise-based method preferred)
    * @method updateValues
+   * @memberof scadavis
    * @param {Object.<string, number>} [values] - values in a object like { "tag1" : 1.0, "tag2": 1.2, "tag3": true }.
    * @returns {number} Returns request handle or null if not ready.
    */
@@ -298,6 +304,7 @@ function scadavis(container, iframeparams, svgurl) {
    * Notice that updating the component at too many times per second can cause performance problems.
    * Preferably update many values using storeValue() then call updateValues() once (repeat after a second or more).
    * @method setValue
+   * @memberof scadavis
    * @param {string} tag - Tag name.
    * @param {number} value - Value for the tag.
    * @param {bool} [failed=false] - True if value is bad or old, false or absent if value is good.
@@ -347,6 +354,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Store a value for a tag. The component will not be updated until called updateValues().
    * @method storeValue
+   * @memberof scadavis
    * @param {string} tag - Tag name.
    * @param {number} value - Value for the tag.
    * @param {bool} [failed=false] - True if value is bad or old, false or absent if value is good.
@@ -376,6 +384,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Reset all data values and tags.
    * @method resetData
+   * @memberof scadavis
    */
   _this.resetData = function () {
     _this.npt = 0
@@ -392,6 +401,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Get a value for a tag.
    * @method getValue
+   * @memberof scadavis
    * @param {Object} tag - Tag name.
    * @returns {nuber} Returns the value for the tag or null if not found.
    */
@@ -405,6 +415,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Recover the API Key.
    * @method getApiKey
+   * @memberof scadavis
    * @returns {string} API Key.
    */
   _this.getApiKey = function () {
@@ -414,6 +425,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Get SCADAvis.io API Version.
    * @method getVersion
+   * @memberof scadavis
    * @returns {string} SCADAvis.io API Version.
    */
   _this.getVersion = function () {
@@ -423,6 +435,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Get the DOM element of the iframe.
    * @method getIframe
+   * @memberof scadavis
    * @returns {Object} DOM element reference.
    */
   _this.getIframe = function () {
@@ -432,6 +445,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Get the current state of the component.
    * @method getComponentState
+   * @memberof scadavis
    * @returns {number} 0=not loaded, 1=loaded and ready for graphics, 2=SVG graphics processed and ready for data.
    */
   _this.getComponentState = function () {
@@ -443,6 +457,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Get SCADAvis.io Component Version.
    * @method getComponentVersion
+   * @memberof scadavis
    * @returns {string} SCADAvis.io Component Version.
    */
   _this.getComponentVersion = function () {
@@ -452,6 +467,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Get tags list from the loaded SVG graphics.
    * @method getTagsList
+   * @memberof scadavis
    * @returns {string} Tags list.
    */
   _this.getTagsList = function () {
@@ -461,6 +477,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Move the graphic. Multiple calls have cumulative effect.
    * @method moveBy
+   * @memberof scadavis
    * @param {number} [dx=0] Horizontal distance.
    * @param {number} [dy=0] Vertical distance.
    * @param {boolean} [animate=false] Animate or not.
@@ -478,6 +495,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Apply zoom level. Multiple calls have cumulative effect.
    * @method zoomTo
+   * @memberof scadavis
    * @param {number} [zoomLevel=1.1] Zoom level. >1 zoom in, <1 zoom out.
    * @param {string|{x: number, y: number}} [target={x:0,y:0}] Id of object to zoom in/out or x/y coordinates.
    * @param {boolean} [animate=false] Animate or not.
@@ -501,6 +519,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Apply default zoom level/position.
    * @method zoomToOriginal
+   * @memberof scadavis
    * @param {boolean} [animate=false] Animate or not.
    */
   _this.zoomToOriginal = function (animate) {
@@ -513,6 +532,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Enable or disable pan and zoom tools.
    * @method enableTools
+   * @memberof scadavis
    * @param {boolean} [panEnabled=true] Enable/disable Pan tool.
    * @param {boolean} [zoomEnabled=false] Enable/disable Zoom tool.
    */
@@ -534,6 +554,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Enable or disable pan and zoom via mouse.
    * @method enableMouse
+   * @memberof scadavis
    * @param {boolean} [panEnabled=true] Enable/disable pan via mouse.
    * @param {boolean} [zoomEnabled=true] Enable/disable zoom via mouse.
    */
@@ -555,6 +576,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Set direction of zoom bound to mouse wheel, and event propagation.
    * @method setMouseWheel
+   * @memberof scadavis
    * @param {boolean} [directionBackOut=true] true=back/out, false=back/in.
    * @param {boolean} [blockEventPropagation=true] Enable/disable wheel event propagation.
    */
@@ -578,6 +600,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Enable or disable keyboard functions (zoom & pan).
    * @method enableKeyboard
+   * @memberof scadavis
    * @param {boolean} [keyEnabled=true] Enable/disable Pan tool.
    */
   _this.enableKeyboard = function (keyEnabled) {
@@ -591,6 +614,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Enable or disable alarm flash (objects blinking when alarmed).
    * @method enableAlarmFlash
+   * @memberof scadavis
    * @param {boolean} [alarmFlashEnabled=true] Enable/disable global alarm flash.
    */
   _this.enableAlarmFlash = function (alarmFlashEnabled) {
@@ -607,6 +631,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Hides the watermark.
    * @method hideWatermark
+   * @memberof scadavis
    */
   _this.hideWatermark = function () {
     const obj = { data: { type: 'hideWatermark' } }
@@ -618,6 +643,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Set color code for color shortcuts.
    * @method setColor
+   * @memberof scadavis
    * @param {number} [colorNumber] Color shortcut number.
    * @param {string} [colorCode] Color code.
    */
@@ -637,6 +663,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Set color code for color shortcuts.
    * @method setColors
+   * @memberof scadavis
    * @param {number} [colorNumber] Color shortcut number.
    * @param {string} [colorCode] Color code.
    */
@@ -655,6 +682,7 @@ function scadavis(container, iframeparams, svgurl) {
   /**
    * Set event listeners.
    * @method on
+   * @memberof scadavis
    * @param {string} event Event name, one of: "ready", "click" (the first parameter of callback is the element id).
    * @param {function} callback Callback function.
    * @returns True for valid event, false for invalid event name.
@@ -804,13 +832,14 @@ function scadavis(container, iframeparams, svgurl) {
 }
 
 /**
- * SCADAvis.io synoptic API.
- * @method scadavisInit - Initialization of the library via promise. Only available for version 2+.
+ * Initialization of the library via promise. Only available for version 2+.
+ * @function scadavisInit
+ * @global
  * @param {string} [container] - ID of the container object. If empty or null the iframe will be appended to the body.
  * @param {string} [iframeparams] - Parameter string for configuring iframe (excluding id and src and sandbox) e.g. 'frameborder="0" height="250" width="250"'.
  * @param {string} [svgurl] - URL for the SVG file.
  * @param {{container: string|Object, iframeparams: string, svgurl: string, colorsTable: Object}} [paramsobj] - Alternatively parameters can be passed in an object.
- * @returns {Object} Returns a promise. The promise resolves after the svg file is preprocessed (if an SVG file was specified) or after the component is loaded.
+ * @returns {Object} Returns a promise with the {@link scadavis} object as a parameter. The promise resolves after the svg file is preprocessed (if an SVG file was specified) or after the component is loaded.
  * Example usage: scadavisInit( {container: "div1", svgurl: "file.svg"} ).then(function (sv) { ... });
  */
 function scadavisInit(container, iframeparams, svgurl) {
