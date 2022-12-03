@@ -37,7 +37,7 @@
  */
 function scadavis(container, iframeparams, svgurl) {
   const _this = this
-  const version = '2.0.5'
+  const version = '2.0.6'
   let id
   let iframehtm
   let scrolling = ' scrolling="no" '

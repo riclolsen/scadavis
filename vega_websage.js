@@ -109,7 +109,7 @@ WebSAGE.SetIniExtended = function (inksage_labelvec, lbv, item) {
       item._d3arc_max = parseFloat(params[1] || 100)
       item._d3arc_innerRadius = parseFloat(params[2] || 0)
       item._d3arc_duration = parseFloat(params[3] || 750)
-      var arc = d3.svg
+      var arc = d3
         .arc()
         .innerRadius(item._d3arc_innerRadius)
         .outerRadius(100)
@@ -122,9 +122,9 @@ WebSAGE.SetIniExtended = function (inksage_labelvec, lbv, item) {
         .attr('d', arc)
       item._d3arc = sl
       item._d3arc.datum({ oldAngle: 0 })
-      sl[0][0].style.cssText = item.style.cssText
+      sl._groups[0][0].style.cssText = item.style.cssText
       var bb = item.getBBox()
-      sl[0][0].setAttributeNS(
+      sl._groups[0][0].setAttributeNS(
         null,
         'transform',
         item.getAttributeNS(null, 'transform') ||
@@ -344,7 +344,7 @@ WebSAGE.SetExeExtended = function (i) {
         (vt - WebSAGE.InkSage[i].parent._d3arc_min) /
         (WebSAGE.InkSage[i].parent._d3arc_max -
           WebSAGE.InkSage[i].parent._d3arc_min)
-      var arc = d3.svg
+      var arc = d3
         .arc()
         .innerRadius(WebSAGE.InkSage[i].parent._d3arc_innerRadius)
         .outerRadius(100)
