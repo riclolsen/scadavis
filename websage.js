@@ -2510,7 +2510,7 @@ var WebSAGE = {
       if (SVGDoc != null) WebSAGE.setBgColor(Color_BackgroundSVG)
     } catch (exception) {}
 
-    if (false)
+    if (true)
       WebSAGE.g_blinktimerID = setInterval(
         WebSAGE.timerBlink,
         WebSAGE.g_blinkperiod
