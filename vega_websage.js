@@ -362,7 +362,7 @@ WebSAGE.SetExeExtended = function (i) {
         .transition()
         .duration(WebSAGE.InkSage[i].parent._d3arc_duration)
         .attrTween('d', arcTween(proporcao * 2 * Math.PI))
-        .each('end', function () {
+        .on('end', function () {
           WebSAGE.InkSage[i].parent._d3arc.datum({
             oldAngle: proporcao * 2 * Math.PI,
           })

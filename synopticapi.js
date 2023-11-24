@@ -37,7 +37,7 @@
  */
 function scadavis(container, iframeparams, svgurl) {
   const _this = this
-  const version = '2.0.6'
+  const version = '2.0.7'
   let id
   let iframehtm
   let scrolling = ' scrolling="no" '
@@ -209,23 +209,6 @@ function scadavis(container, iframeparams, svgurl) {
       }
       xhr.send()
     }
-  }
-
-  /**
-   * Reset all data values and tags.
-   * @method resetData
-   * @memberof scadavis
-   */
-  _this.resetData = function () {
-    _this.npt = 0
-    _this.npts = []
-    _this.vals = []
-    _this.qualifs = []
-
-    const obj = { data: { type: 'resetData' } }
-    if (_this.readyfordata)
-      _this.iframe.contentWindow.postMessage(obj, _this.domain)
-    else _this.resetobj = obj
   }
 
   /**
